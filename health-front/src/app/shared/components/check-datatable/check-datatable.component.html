@@ -1,0 +1,111 @@
+<form [formGroup]="searchForm" class="row">
+  <div class="col-md-4">
+    <div class="form-group">
+      <input id="responsible" placeholder="Buscar por responsável" formControlName="responsible"
+             class="form-control form-control-rounded" type="text">
+    </div>
+  </div>
+  <div class="col-md-3 form-group mb-3">
+    <select class="form-control form-control-rounded" formControlName="month">
+      <option value="00">Todos os meses</option>
+      <option value="01">Janeiro</option>
+      <option value="02">Fevereiro</option>
+      <option value="03">Março</option>
+      <option value="04">Abril</option>
+      <option value="05">Maio</option>
+      <option value="06">Junho</option>
+      <option value="07">Julho</option>
+      <option value="08">Agosto</option>
+      <option value="09">Setembro</option>
+      <option value="10">Outubro</option>
+      <option value="11">Novembro</option>
+      <option value="12">Dezembro</option>
+    </select>
+  </div>
+  <div class="col-md-12">
+    <div class="card  o-hidden">
+      <ngx-datatable #table
+                     style="height: 500px; box-shadow: none"
+                     class="material fullscreen"
+                     [columnMode]="'force'"
+                     [headerHeight]="50"
+                     [footerHeight]="50"
+                     [rowHeight]="60"
+                     [scrollbarV]="true"
+                     [loadingIndicator]="isLoading"
+                     [rows]="filteredChecks"
+                     (activate)="onActivate($event)" id="cardClick">
+        <ngx-datatable-column name="responsible">
+          <ng-template ngx-datatable-header-template>
+            Responsável
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="emitter">
+          <ng-template ngx-datatable-header-template>
+            Emitente
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="cpfCnpj">
+          <ng-template ngx-datatable-header-template>
+            Cpf/Cnpj
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="bank">
+          <ng-template ngx-datatable-header-template>
+            Banco
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="account">
+          <ng-template ngx-datatable-header-template>
+            Conta
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="number">
+          <ng-template ngx-datatable-header-template>
+            Número
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="value">
+          <ng-template ngx-datatable-header-template>
+            Valor
+          </ng-template>
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            {{value | currency:'BRL':'symbol'}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="date">
+          <ng-template ngx-datatable-header-template>
+            Data
+          </ng-template>
+          <ng-template let-value="value" ngx-datatable-cell-template>
+            {{value | date: 'dd/MM/yyyy'}}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-footer>
+          <ng-template
+            ngx-datatable-footer-template
+            let-rowCount="rowCount"
+            let-pageSize="pageSize"
+            let-selectedCount="selectedCount"
+            let-curPage="curPage"
+            let-offset="offset">
+            <div style="padding: 5px 10px; font-size: 15px;">
+              <strong>Total:</strong> {{totalValue |  currency:'BRL':'symbol'}}<br>
+            </div>
+            <datatable-pager
+              [pagerLeftArrowIcon]="'datatable-icon-left'"
+              [pagerRightArrowIcon]="'datatable-icon-right'"
+              [pagerPreviousIcon]="'datatable-icon-prev'"
+              [pagerNextIcon]="'datatable-icon-skip'"
+              [page]="curPage"
+              [size]="pageSize"
+              [count]="rowCount"
+              [hidden]="!((rowCount / pageSize) > 1)"
+              (change)="table.onFooterPage($event)">
+            </datatable-pager>
+          </ng-template>
+        </ngx-datatable-footer>
+      </ngx-datatable>
+    </div>
+  </div>
+</form>

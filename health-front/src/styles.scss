@@ -1,0 +1,4 @@
+//fix bug ngx-datatable
+.ngx-datatable.scroll-vertical .datatable-body {
+  overflow-x: hidden !important;
+}

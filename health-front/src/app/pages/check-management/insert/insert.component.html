@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card mb-4">
+      <div class="card-body">
+        <div class="card-title mb-3">Nova receita</div>
+        <form #formChange="ngForm" name="formChange">
+          <div class="row">
+            <div class="col-md-3 form-group mb-3">
+              <label for="paciente">Paciente</label>
+              <div class="input-group">
+                <input id="paciente" class="form-control form-control-rounded" name="paciente" [(ngModel)]="paciente" placeholder="000.000.000-00" mask="000.000.000-00" required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3 form-group mb-3">
+              <label for="data">Data da receita</label>
+              <div class="input-group">
+                <input id="data" class="form-control form-control-rounded" placeholder="dd/mm/aaaa" name="dp" [(ngModel)]="date" mask="00/00/0000" required>
+              </div>
+            </div>
+          </div>
+          <hr style="margin: 10px 0 18px 0">
+          <div class="row" *ngFor="let medicamento of medicamentos; let index = index">
+            <div class="col-md-3 form-group mb-3">
+              <label for="medicamentosNome" *ngIf="index === 0">Nome do medicamento</label>
+              <div class="input-group">
+                <input id="medicamentosNome" class="form-control form-control-rounded" name="medicamentosNome" [(ngModel)]="medicamento.nome" placeholder="Nome" required>
+              </div>
+            </div>
+            <div class="col-md-3 form-group mb-3">
+              <label for="medicamentosDosagem" *ngIf="index === 0">Dosagem(mg)</label>
+              <div class="input-group">
+                <input class="form-control form-control-rounded" name="medicamentosDosagem" type="number" [(ngModel)]="medicamento.dosagem" placeholder="Dosagem" required>
+              </div>
+            </div>
+            <div class="col-md-3 form-group mb-3">
+              <label for="medicamentosUso" *ngIf="index === 0">Uso(dias)</label>
+              <div class="input-group">
+                <input class="form-control form-control-rounded" type="number" name="medicamentosUso" [(ngModel)]="medicamento.uso" placeholder="Uso" required>
+              </div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <a class="text-info" (click)="adicionarNovo()">Adicionar novo medicamento</a>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <btn-loading btnClass="btn-primary btn-rounded" [loading]="isLoading" [loadingText]="'Inserindo'" (click)="saveChanges(response.id, date)" [disabled]="formChange.invalid">Receitar</btn-loading>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

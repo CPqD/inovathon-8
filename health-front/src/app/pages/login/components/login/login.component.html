@@ -1,0 +1,29 @@
+<div class="auth-layout-wrap" style="background-image: url(./assets/images/photo-wide-4.jpg)">
+  <div class="auth-content">
+    <div class="card o-hidden">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="p-4">
+            <div class="auth-logo text-center mb-4">
+              <img src="assets/images/logo.png" alt="">
+            </div>
+            <h1 class="mb-3 text-18">Entre com suas credenciais</h1>
+            <form (ngSubmit)="login(username, password)" #formLogin="ngForm" name="formLogin">
+              <div class="form-group">
+                <label for="username">Usuário</label>
+                <input id="username" name="username" class="form-control form-control-rounded" type="text" [(ngModel)]="username" required>
+              </div>
+              <div class="form-group">
+                <label for="password">Senha</label>
+                <input id="password" name="password" class="form-control form-control-rounded" type="password" [(ngModel)]="password" required>
+              </div>
+              <btn-loading btnClass="btn-primary btn-rounded btn-block mt-3" [loadingText]="'Entrando'" [loading]="loading" [disabled]="formLogin.invalid">
+                Entrar
+              </btn-loading>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
